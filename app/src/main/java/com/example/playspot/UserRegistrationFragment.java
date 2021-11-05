@@ -16,8 +16,20 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.playspot.databinding.FragmentUserRegistrationBinding;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +41,7 @@ public class UserRegistrationFragment extends Fragment {
     AppCompatButton userregistration;
     LinearLayout userregistrationback;
 
-    String status,message,Name,Place,District,Phone,Email,Password;
+    String status,message,Name,Place,District,Phone,Email,Password,url = Config.baseurl+"user_registration.php";
 
 
     @Override
@@ -120,7 +132,44 @@ public class UserRegistrationFragment extends Fragment {
             return;
         }
 
-
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject c = new JSONObject(response);
+                    status = c.getString("status");
+                    message = c.getString("message");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status.equals("1")){
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getActivity(),Login.class));
+                }
+                else{
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("name", Name);
+                map.put("place", Place);
+                map.put("district", District);
+                map.put("phone", Phone);
+                map.put("email", Email);
+                map.put("password", Password);
+                return  map;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
 
     }
     public static boolean isPhoneValid(String s) {
