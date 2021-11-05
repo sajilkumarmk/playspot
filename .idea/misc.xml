@@ -3,10 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/button_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_facebook.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_google.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_logo.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_twitter.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/introslider_button_bg.xml" value="0.19212962962962962" />
-        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_intro_slider.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/login_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/login_edittext_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/login_layout_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_intro_slider.xml" value="0.22" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_registration.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_splashscreen.xml" value="0.22" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_playground_registration.xml" value="0.22" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_user_registration.xml" value="0.22" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/slide_layout.xml" value="0.22" />
       </map>
     </option>
