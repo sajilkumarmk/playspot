@@ -59,6 +59,7 @@ public class UserRegistrationFragment extends Fragment {
         userregistration = binding.userRegButton;
         userregistrationback = binding.UserRegBack;
 
+//      Setting values to the spinner
         String[] dis = {"Select District","Kasaragod","Kannur","Wayanad","Kozhikode","Malappuram","Palakkad",
                 "Thrissur","Ernakulam","Alappuzha","Idukki","Kollam","Kottayam","Pathanamthitta","Thiruvananthapuram"};
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, dis);
@@ -85,6 +86,7 @@ public class UserRegistrationFragment extends Fragment {
 
     private void userreg() {
 
+//        getting the values from the fields
         Name = username.getText().toString();
         Place = userplace.getText().toString();
         District = userdistrict.getSelectedItem().toString();
@@ -92,6 +94,7 @@ public class UserRegistrationFragment extends Fragment {
         Email = useremail.getText().toString();
         Password = userpassword.getText().toString();
 
+//        Validating the values and highlight errors is any
         if (TextUtils.isEmpty(Name)){
             username.setError("Required field");
             username.requestFocus();
@@ -132,6 +135,7 @@ public class UserRegistrationFragment extends Fragment {
             return;
         }
 
+//        Executing the query to register using the volley
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -146,6 +150,12 @@ public class UserRegistrationFragment extends Fragment {
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getActivity(),Login.class));
                 }
+                else if (status.equals("2")){
+//                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    useremail.setError(message);
+                    useremail.requestFocus();
+                    return;
+                }
                 else{
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -156,6 +166,7 @@ public class UserRegistrationFragment extends Fragment {
                 Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
             }
         }){
+//            passing values to the php file using map
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
@@ -172,12 +183,13 @@ public class UserRegistrationFragment extends Fragment {
         requestQueue.add(stringRequest);
 
     }
+//    Phone validation method for pattern matching
     public static boolean isPhoneValid(String s) {
         Pattern p = Pattern.compile("(0/91)?[6-9][0-9]{9}");
         Matcher m = p.matcher(s);
         return (m.find() && m.group().equals(s));
     }
-
+//    Email validation method for pattern matching
     public static boolean isEmailValid(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +

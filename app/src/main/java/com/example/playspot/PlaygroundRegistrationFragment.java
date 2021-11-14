@@ -1,12 +1,21 @@
 package com.example.playspot;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +26,27 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.example.playspot.databinding.FragmentPlaygroundRegistrationBinding;
 import com.example.playspot.databinding.FragmentUserRegistrationBinding;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +59,11 @@ public class PlaygroundRegistrationFragment extends Fragment {
     AppCompatButton playregistration,playupload;
     LinearLayout playregistrationback;
 
-    String status,message,Name,Type,Place,District,Phone,Email,Image,Password,State;
+    String status,message,name,Name,Type,Place,District,Phone,Email,Image,Password,State,url=Config.baseurl+"play_registration.php";
+
+    Uri uri;
+    private RequestQueue rQueue;
+    private static ProgressDialog mProgressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +85,7 @@ public class PlaygroundRegistrationFragment extends Fragment {
         playregistration = binding.playgroundregbutton;
         playregistrationback = binding.playgroundregback;
 
+//      Setting the spinner values
         String[] typ = {"Select Type","Turf","Stadium","Club"};
         ArrayAdapter adaptertype = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, typ);
         playtype.setAdapter(adaptertype);
@@ -63,10 +95,19 @@ public class PlaygroundRegistrationFragment extends Fragment {
         ArrayAdapter adapterdis = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, dis);
         playdistrict.setAdapter(adapterdis);
 
+//      Button click to select the image and show the name of the image
+        playupload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
+
+//        Button click to upload the image and register the details
         playregistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playgroundreg();
+                playgroundreg(name,uri);
             }
         });
 
@@ -79,14 +120,50 @@ public class PlaygroundRegistrationFragment extends Fragment {
             }
         });
 
-
-
-
         return root;
     }
 
-    private void playgroundreg() {
+    private void selectImage() {
 
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (resultCode == RESULT_OK && requestCode == 1 && data != null){
+            uri = data.getData();
+            String uriString = uri.toString();
+            File myFile = new File(uriString);
+
+            if (uriString.startsWith("content://")) {
+                Cursor cursor = null;
+                try {
+                    cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+                    if (cursor != null && cursor.moveToFirst()) {
+                        int index = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                        name = cursor.getString(index);
+                        playimagename.setText(name);
+                        Log.d("nameeeee>>>>  ",name);
+                    }
+                } finally {
+                    cursor.close();
+                }
+            } else if (uriString.startsWith("file://")) {
+                name = myFile.getName();
+                playimagename.setText(name);
+                Log.d("nameeeee>>>>  ",name);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void playgroundreg(final String pdfname, Uri pdffile) {
+
+        //        getting the values from the fields
         Name = playname.getText().toString();
         Type = playtype.getSelectedItem().toString();
         Place = playplace.getText().toString();
@@ -97,6 +174,7 @@ public class PlaygroundRegistrationFragment extends Fragment {
         Image = playimagename.getText().toString();
         Password = playpassword.getText().toString();
 
+//        Validating the values and highlight errors is any
         if (TextUtils.isEmpty(Name)){
             playname.setError("Required field");
             playname.requestFocus();
@@ -140,26 +218,180 @@ public class PlaygroundRegistrationFragment extends Fragment {
             playemail.requestFocus();
             return;
         }
-//        else if (TextUtils.isEmpty(Image)){
-//            playimagename.setError("Required field");
-//            playimagename.requestFocus();
-//            return;
-//        }
+        else if (TextUtils.isEmpty(Image)){
+            playimagename.setError("Required field");
+            playimagename.requestFocus();
+            return;
+        }
         else if (TextUtils.isEmpty(Password)){
             playpassword.setError("Required field");
             playpassword.requestFocus();
             return;
         }
 
+//        For executing the query and image upload using the VolleyMultipartRequest
+        InputStream iStream = null;
+        try {
+            iStream = getActivity().getContentResolver().openInputStream(pdffile);
+            final byte[] inputData = getBytes(iStream);
 
+            showSimpleProgressDialog(getActivity(), null, "Uploading", false);
+
+            VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, url,
+                    new Response.Listener<NetworkResponse>() {
+                        @Override
+                        public void onResponse(NetworkResponse response) {
+                            removeSimpleProgressDialog();
+                            Log.d("ressssssoo",new String(response.data));
+                            rQueue.getCache().clear();
+                            try {
+                                JSONObject jsonObject = new JSONObject(new String(response.data));
+
+                                jsonObject.toString().replace("\\\\","");
+
+                                status = jsonObject.getString("status");
+                                message = jsonObject.getString("message");
+
+                                if (status.equals("1")) {
+                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getActivity(),Login.class));
+                                }
+                                else if (status.equals("2")){
+//                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                    playemail.setError(message);
+                                    playemail.requestFocus();
+                                    return;
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            removeSimpleProgressDialog();
+                            Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+
+                /*
+                 * If you want to add more parameters with the image
+                 * you can do it here
+                 * here we have only one parameter with the image
+                 * which is tags
+                 * */
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    //add string parameters
+                    params.put("name", Name);
+                    params.put("type", Type);
+                    params.put("place", Place);
+                    params.put("district", District);
+                    params.put("state", State);
+                    params.put("phone", Phone);
+                    params.put("email", Email);
+                    params.put("password", Password);
+
+                    return params;
+                }
+
+                /*
+                 *pass files using below method
+                 * */
+                @Override
+                protected Map<String, DataPart> getByteData() {
+                    Map<String, DataPart> params = new HashMap<>();
+
+                    params.put("filename", new DataPart(pdfname ,inputData));
+                    return params;
+                }
+            };
+
+
+            volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    0,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            rQueue = Volley.newRequestQueue(getActivity());
+            rQueue.add(volleyMultipartRequest);
+
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
+
+    public byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
+
+
+    public static void removeSimpleProgressDialog() {
+        try {
+            if (mProgressDialog != null) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+            }
+        } catch (IllegalArgumentException ie) {
+            Log.e("Log", "inside catch IllegalArgumentException");
+            ie.printStackTrace();
+        } catch (RuntimeException re) {
+            Log.e("Log", "inside catch RuntimeException");
+            re.printStackTrace();
+        } catch (Exception e) {
+            Log.e("Log", "Inside catch Exception");
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void showSimpleProgressDialog(Context context, String title,
+                                                String msg, boolean isCancelable) {
+        try {
+            if (mProgressDialog == null) {
+                mProgressDialog = ProgressDialog.show(context, title, msg);
+                mProgressDialog.setCancelable(isCancelable);
+            }
+            if (!mProgressDialog.isShowing()) {
+                mProgressDialog.show();
+            }
+        } catch (IllegalArgumentException ie) {
+            ie.printStackTrace();
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    Phone validation method for pattern matching
     public static boolean isPhoneValid(String s) {
         Pattern p = Pattern.compile("(0/91)?[6-9][0-9]{9}");
         Matcher m = p.matcher(s);
         return (m.find() && m.group().equals(s));
     }
 
+//    Email validation method for pattern matching
     public static boolean isEmailValid(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
