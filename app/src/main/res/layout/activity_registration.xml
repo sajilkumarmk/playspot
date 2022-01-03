@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Registration">
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         app:tabIndicatorColor="@color/green_primary"
-        app:tabRippleColor="@color/green_primary"
         app:tabSelectedTextColor="@color/green_primary"
-        app:tabTextColor="@color/white_300"/>
+        app:tabTextColor="@color/white_300" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

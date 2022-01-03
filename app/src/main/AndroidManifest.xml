@@ -14,16 +14,19 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Registration"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.PlayspotThemeBlack"/>
         <activity
             android:name=".Login"
             android:exported="true" />
         <activity
             android:name=".IntroSlider"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.PlayspotThemeBlack"/>
         <activity
             android:name=".SplashScreenActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.PlayspotThemeBlack">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

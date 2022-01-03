@@ -33,14 +33,14 @@ public class SliderAdapter extends PagerAdapter {
     public String[] slide_headings = {
             "Booking",
             "Activity Tracking",
-            "Account Monitoring",
+            "Account Managing",
             "Health Monitoring"
     };
     public String[] slide_descs = {
-            "Book your favorite playing spot",
+            "Search and book your favorite playgrounds at any place",
             "Track your daily gaming activity",
             "Manage your accounting details efficiently",
-            "Monitor your health and activity"
+            "Monitor and get updates about your health based on your gaming activity"
     };
 
     @Override

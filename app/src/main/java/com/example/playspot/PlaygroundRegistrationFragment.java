@@ -2,6 +2,7 @@ package com.example.playspot;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -58,6 +59,7 @@ public class PlaygroundRegistrationFragment extends Fragment {
     Spinner playdistrict,playtype;
     AppCompatButton playregistration,playupload;
     LinearLayout playregistrationback;
+    Dialog dialog;
 
     String status,message,name,Name,Type,Place,District,Phone,Email,Image,Password,State,url=Config.baseurl+"play_registration.php";
 
@@ -235,7 +237,7 @@ public class PlaygroundRegistrationFragment extends Fragment {
             iStream = getActivity().getContentResolver().openInputStream(pdffile);
             final byte[] inputData = getBytes(iStream);
 
-            showSimpleProgressDialog(getActivity(), null, "Uploading", false);
+            showSimpleProgressDialog(getActivity(), null, "Loading", false);
 
             VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, url,
                     new Response.Listener<NetworkResponse>() {
@@ -253,8 +255,9 @@ public class PlaygroundRegistrationFragment extends Fragment {
                                 message = jsonObject.getString("message");
 
                                 if (status.equals("1")) {
-                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getActivity(),Login.class));
+//                                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+//                                    startActivity(new Intent(getActivity(),Login.class));
+                                    showDialog();
                                 }
                                 else if (status.equals("2")){
 //                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -329,6 +332,24 @@ public class PlaygroundRegistrationFragment extends Fragment {
             e.printStackTrace();
         }
 
+    }
+
+    public void showDialog(){
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.alert_dialogbox);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        AppCompatButton alertButton = dialog.findViewById(R.id.alertButton);
+
+        alertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                startActivity(new Intent(getActivity(),Login.class));
+                getActivity().finish();
+            }
+        });
+        dialog.show();
     }
 
     public byte[] getBytes(InputStream inputStream) throws IOException {

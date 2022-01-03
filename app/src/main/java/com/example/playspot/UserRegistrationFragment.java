@@ -149,6 +149,7 @@ public class UserRegistrationFragment extends Fragment {
                 if (status.equals("1")){
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getActivity(),Login.class));
+                    getActivity().finish();
                 }
                 else if (status.equals("2")){
 //                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
