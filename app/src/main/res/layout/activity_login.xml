@@ -42,9 +42,9 @@
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="15dp"
                 android:elevation="10dp"
-                android:inputType="textEmailAddress"
                 android:fontFamily="@font/poppins_regular"
                 android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="15dp"
                 android:textSize="15sp" />
 

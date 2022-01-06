@@ -16,6 +16,11 @@
     <color name="green_300">#FF27A09E</color>
     <color name="green_400">#FF205374</color>
 
+    <color name="orange_600">#E65100</color>
+    <color name="orange_500">#FFA200</color>
+    <color name="orange_200">#FFE0B2</color>
+    <color name="orange_100">#FDEFD7</color>
+
     <color name="black_300">#FF000000</color>
     <color name="black_200">#FF212121</color>
     <color name="black_100">#FF373737</color>

@@ -28,10 +28,10 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.PlayspotThemeBlack" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.PlayspotThemeAdmin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/green_100</item>
-        <item name="colorPrimaryVariant">@color/green_primary</item>
+        <item name="colorPrimary">@color/orange_500</item>
+        <item name="colorPrimaryVariant">@color/orange_600</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

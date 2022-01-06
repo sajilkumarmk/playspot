@@ -75,12 +75,12 @@ public class Login extends AppCompatActivity {
                     message = c.getString("message");
                     id = c.getString("id");
                     Emailid = c.getString("email");
+                    pass = c.getString("password");
                     name = c.getString("name");
                     place = c.getString("place");
                     district = c.getString("district");
                     phone = c.getString("phone");
                     image = c.getString("image");
-                    pass = c.getString("password");
                     type = c.getString("type");
                     state = c.getString("state");
 
@@ -88,21 +88,21 @@ public class Login extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if (status.equals("1")){
-                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,name,place,district,phone,image,pass,type,state);
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getApplicationContext(), AdminHome.class);
-//                    startActivity(intent);
-//                    finish();
+                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,name,place,district,phone,image,type,state);
+//                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), Admin.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else if (status.equals("2")){
-                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,name,place,district,phone,image,pass,type,state);
+                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,name,place,district,phone,image,type,state);
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent(getApplicationContext(), UserHome.class);
 //                    startActivity(intent);
 //                    finish();
                 }
                 else if (status.equals("3")){
-                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,name,place,district,phone,image,pass,type,state);
+                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,name,place,district,phone,image,type,state);
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent(getApplicationContext(), PlayHome.class);
 //                    startActivity(intent);

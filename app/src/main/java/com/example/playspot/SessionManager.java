@@ -51,7 +51,7 @@ public class SessionManager {
          * @param email
          * @param image
          * @param pass*/
-        public void createLoginSession(String id, String email, String name, String place, String district, String phone, String image, String pass, String type, String state){
+        public void createLoginSession(String id, String email, String pass, String name, String place, String district, String phone, String image, String type, String state){
             // Storing login value as TRUE
             editor.putBoolean(IS_LOGIN, true);
 
@@ -60,12 +60,12 @@ public class SessionManager {
 
             // Storing email in pref
             editor.putString("email", email);
+            editor.putString("password", pass);
             editor.putString("name", name);
             editor.putString("place", place);
             editor.putString("district", district);
             editor.putString("phone", phone);
             editor.putString("image", image);
-            editor.putString("password", pass);
             editor.putString("state", state);
             editor.putString("type", type);
 
@@ -111,12 +111,12 @@ public class SessionManager {
 
             // user email id
             user.put("email", pref.getString("email", null));
+            user.put("password", pref.getString("password", null));
             user.put("place", pref.getString("place", null));
             user.put("district", pref.getString("district", null));
             user.put("phone", pref.getString("phone", null));
             user.put("name", pref.getString("name", null));
             user.put("image", pref.getString("image", null));
-            user.put("password", pref.getString("password", null));
             user.put("state", pref.getString("state", null));
             user.put("type", pref.getString("type", null));
 

@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/admin_button_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/admin_profile_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/bottom_navigation_bg.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/button_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_baseline_feedback_24.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_facebook.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_google.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19212962962962962" />
@@ -13,14 +19,22 @@
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/login_bg.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/login_edittext_bg.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/login_layout_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_admin.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_intro_slider.xml" value="0.22" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_registration.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/activity_splashscreen.xml" value="0.22" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/alert_dialogbox.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_adminhome.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_adminprofile.xml" value="0.22" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_approved_plaground.xml" value="0.16527777777777777" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_dashboard.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_home.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_notifications.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_playground_registration.xml" value="0.22" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/fragment_user_registration.xml" value="0.22" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/layout/slide_layout.xml" value="0.22" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/menu/bottom_nav_menu.xml" value="0.17777777777777778" />
       </map>
     </option>
   </component>

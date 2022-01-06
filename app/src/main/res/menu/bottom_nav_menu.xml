@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_admin_home"
+        android:icon="@drawable/ic_admin_home_black_24dp"
+        android:title="@string/title_adminHome" />
+
+    <item
+        android:id="@+id/navigation_admin_feedback"
+        android:icon="@drawable/ic_baseline_feedback_24"
+        android:title="@string/title_adminFeedback" />
+
+    <item
+        android:id="@+id/navigation_admin_profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/title_adminProfile" />
+
+</menu>
