@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_admin_home"
-        android:name="com.example.playspot.admin.admin_home.AdminHomeFragment"
+        android:name="com.example.play.admin.admin_home.AdminHomeFragment"
         android:label="@string/title_adminHome"
         tools:layout="@layout/fragment_adminhome" />
 
     <fragment
         android:id="@+id/navigation_admin_feedback"
-        android:name="com.example.playspot.admin.admin_feedback.AdminFeedbackFragment"
+        android:name="com.example.play.admin.admin_feedback.AdminFeedbackFragment"
         android:label="@string/title_adminFeedback"
         tools:layout="@layout/fragment_adminfeedback" />
 
     <fragment
         android:id="@+id/navigation_admin_profile"
-        android:name="com.example.playspot.admin.admin_profile.AdminProfileFragment"
+        android:name="com.example.play.admin.admin_profile.AdminProfileFragment"
         android:label="@string/title_adminProfile"
         tools:layout="@layout/fragment_adminprofile" />
 </navigation>
