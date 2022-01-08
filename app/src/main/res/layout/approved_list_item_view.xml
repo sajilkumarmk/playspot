@@ -28,11 +28,19 @@
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"/>
             </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                app:cardElevation="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
                 <TextView
                     android:id="@+id/pName"
                     android:fontFamily="@font/poppins_semibold"
@@ -122,28 +130,42 @@
                         android:text="EMAIL"/>
                 </LinearLayout>
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white_300"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="10dp"/>
+            </androidx.cardview.widget.CardView>
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:background="@color/white_300"-->
+<!--                android:layout_marginLeft="25dp"-->
+<!--                android:layout_marginRight="25dp"-->
+<!--                android:layout_marginBottom="10dp"/>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID PROOF"
                 android:fontFamily="@font/poppins_bold"
                 android:layout_gravity="left"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="25dp"
                 android:textSize="20sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white_300"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="25dp" />
+        </LinearLayout>
             <ImageView
                 android:id="@+id/idProof"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="5dp"
                 android:scaleType="centerCrop"/>
         </LinearLayout>
     </ScrollView>

@@ -23,7 +23,7 @@ public class Admin extends AppCompatActivity {
         binding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navAdminView = findViewById(R.id.nav_admin_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -31,7 +31,7 @@ public class Admin extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_admin);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(binding.navAdminView, navController);
     }
 
 }
