@@ -23,7 +23,7 @@ public class AdminHomeViewPageAdapter extends FragmentStateAdapter {
             case 1:
                 return new PendingPlaygroundFragment();
         }
-        return  new ApprovedPlagroundFragment();
+        return new ApprovedPlagroundFragment();
 
     }
 

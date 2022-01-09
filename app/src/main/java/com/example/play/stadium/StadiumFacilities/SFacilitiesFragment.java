@@ -1,4 +1,4 @@
-package com.example.play.admin.admin_home;
+package com.example.play.stadium.StadiumFacilities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,39 +24,61 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.play.Config;
 import com.example.play.R;
+import com.example.play.SessionManager;
+import com.example.play.admin.admin_home.ListItemClick;
+import com.example.play.admin.admin_home.PlaygroundListAdapter;
+import com.example.play.admin.admin_home.PlaygroundListDataModel;
 import com.example.play.databinding.FragmentPendingPlaygroundBinding;
+import com.example.play.databinding.FragmentSFacilitiesBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
-public class ApprovedPlagroundFragment extends Fragment implements ListItemClick{
+public class SFacilitiesFragment extends Fragment implements ListItemClick {
 
-    private FragmentPendingPlaygroundBinding binding;
+    private FragmentSFacilitiesBinding binding;
     RecyclerView recyclerview;
-    private String URLstring = Config.baseurl+"admin_play_list_approved.php";
+    FloatingActionButton add;
+    private String URLstring = Config.baseurl+"stadium_facilities_list.php";
     private static ProgressDialog mProgressDialog;
-    ArrayList<PlaygroundListDataModel> dataModelArrayList;
-    private PlaygroundListAdapter rvAdapter;
-
+    ArrayList<SFacilitiesListDataModel> dataModelArrayList;
+    private SFacilitiesListAdapter rvAdapter;
+    String id, url = Config.baseurl+"stadium_remove_facilities.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentPendingPlaygroundBinding.inflate(inflater, container, false);
+        binding = FragmentSFacilitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        recyclerview = binding.recyclerList;
+        recyclerview = binding.recyclerSFacilitiesList;
+        add = binding.sFacilitiesAdd;
         fetchingJSON();
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StadiumFacilitiesAdd.class);
+                startActivity(intent);
+            }
+        });
         return root;
     }
     private void fetchingJSON() {
+
+        id = new SessionManager(getActivity()).getUserDetails().get("id");
+
         showSimpleProgressDialog(getActivity(), "Loading...","Please wait...",false);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLstring,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLstring,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -66,19 +89,13 @@ public class ApprovedPlagroundFragment extends Fragment implements ListItemClick
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject dataobj = array.getJSONObject(i);
-                                dataModelArrayList.add(new PlaygroundListDataModel(
-                                        dataobj.getString("id"),
-                                        dataobj.getString("name"),
-                                        dataobj.getString("type"),
-                                        dataobj.getString("district"),
-                                        dataobj.getString("place"),
-                                        dataobj.getString("state"),
-                                        dataobj.getString("id_proof"),
-                                        dataobj.getString("phone"),
-                                        dataobj.getString("email"),
-                                        dataobj.getString("image")
+                                dataModelArrayList.add(new SFacilitiesListDataModel(
+                                        dataobj.getString("f_id"),
+                                        dataobj.getString("facility"),
+                                        dataobj.getString("opening"),
+                                        dataobj.getString("closing"),
+                                        dataobj.getString("description")
                                 ));
-
                             }
                             setupRecycler();
 
@@ -94,16 +111,23 @@ public class ApprovedPlagroundFragment extends Fragment implements ListItemClick
                         //displaying the error in toast if occurs
                         Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("id", id);
+                return map;
+            }
+        };
 
         // request queue
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getActivity());
+        RequestQueue requestQueue = Volley.newRequestQueue(this.requireActivity());
         requestQueue.add(stringRequest);
     }
 
     private void setupRecycler(){
 
-        rvAdapter = new PlaygroundListAdapter(getActivity(), dataModelArrayList, this);
+        rvAdapter = new SFacilitiesListAdapter(getActivity(), dataModelArrayList, this);
         recyclerview.setHasFixedSize(true);
         recyclerview.setAdapter(rvAdapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -160,19 +184,43 @@ public class ApprovedPlagroundFragment extends Fragment implements ListItemClick
     @Override
     public void onItemClick(int position) {
 
-        Intent intent = new Intent(getActivity(), ApprovedListItemView.class);
+        id = dataModelArrayList.get(position).getId();
 
-        intent.putExtra("ID", dataModelArrayList.get(position).getId());
-        intent.putExtra("TYPE", dataModelArrayList.get(position).getType());
-        intent.putExtra("NAME", dataModelArrayList.get(position).getName());
-        intent.putExtra("PLACE", dataModelArrayList.get(position).getPlace());
-        intent.putExtra("DISTRICT", dataModelArrayList.get(position).getDistrict());
-        intent.putExtra("STATE", dataModelArrayList.get(position).getState());
-        intent.putExtra("IDPROOF", dataModelArrayList.get(position).getIdProof());
-        intent.putExtra("PHONE", dataModelArrayList.get(position).getPhone());
-        intent.putExtra("EMAIL", dataModelArrayList.get(position).getEmail());
-        intent.putExtra("IMAGE", dataModelArrayList.get(position).getImage());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String status = null,message = null;
+                try {
+                    JSONObject c = new JSONObject(response);
+                    status = c.getString("status");
+                    message = c.getString("message");
 
-        startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status.equals("1")){
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    fetchingJSON();
+//                    startActivity(new Intent(getActivity(),StadiumFacilitiesFragment.class));
+//                    getActivity().finish();
+                } else{
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("id", id);
+                return map;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
     }
 }

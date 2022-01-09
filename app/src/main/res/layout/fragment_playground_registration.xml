@@ -117,21 +117,23 @@
             android:layout_marginLeft="20dp"
             android:layout_weight="4"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/playgroundregimagename"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-                android:layout_weight="3"
-            android:elevation="10dp"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
-                android:layout_marginLeft="5dp"
-            android:textSize="15sp"
+                android:layout_weight="3"
+                android:background="@drawable/login_edittext_bg"
+                android:elevation="10dp"
+                android:fontFamily="@font/poppins_regular"
                 android:hint="Upload ID_Proof"
                 android:paddingLeft="15dp"
                 android:paddingTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:background="@drawable/login_edittext_bg"/>
+                android:textSize="15sp" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/playgroundregupload"
                 android:layout_width="0dp"

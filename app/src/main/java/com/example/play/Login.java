@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
     TextView forgetPassword;
     LinearLayout registration;
 
-    String Email,Password,status,message,id,type,name,place,district,state,phone,Emailid,image,pass,url = Config.baseurl+"login.php";
+    String Email,Password,status,message,id,type,name,place,district,state,phone,Emailid,image,pass,typeCheck,url = Config.baseurl+"login.php";
 
 
     @Override
@@ -103,10 +103,18 @@ public class Login extends AppCompatActivity {
                 }
                 else if (status.equals("3")){
                     new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,type,name,place,district,phone,image,state);
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), Stadium.class);
-                    startActivity(intent);
-                    finish();
+//                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    typeCheck = new SessionManager(getApplication()).getUserDetails().get("type");
+
+                    if (typeCheck.equals("Stadium")){
+                        Intent intent = new Intent(getApplicationContext(), Stadium.class);
+                        startActivity(intent);
+                        finish();
+                    }else if (typeCheck.equals("Turf")){
+                        Toast.makeText(getApplicationContext(), "Turf", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Club", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else if (status.equals("4")){
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

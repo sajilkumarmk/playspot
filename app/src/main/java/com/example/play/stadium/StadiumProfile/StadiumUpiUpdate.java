@@ -83,10 +83,10 @@ public class StadiumUpiUpdate extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if (status.equals("1")){
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getApplicationContext(), Admin.class);
-//                    startActivity(intent);
-//                    finish();
+                    Toast.makeText(getApplication(), message, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplication(), StadiumProfileFragment.class);
+                    startActivity(intent);
+                    finish();
                 } else{
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -139,8 +139,6 @@ public class StadiumUpiUpdate extends AppCompatActivity {
                 if (status.equals("1")){
 //                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     setUpiID();
-                    Intent intent = new Intent(getApplicationContext(), StadiumProfileFragment.class);
-                    startActivity(intent);
                 } else{
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }

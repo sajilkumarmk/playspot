@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,9 +62,12 @@ public class StadiumProfileFragment extends Fragment {
     private FragmentStadiumProfileBinding binding;
     ImageView dp;
     ImageButton logout;
+    EditText newPass, conPass;
     TextView sname, stype, splace, sdistrict, sstate, sphone, semail;
-    AppCompatButton update, upi;
-    String id, image, pass, name, type, place, district, state, phone, email, status, message, url=Config.baseurl+"stadium_dp_update.php";
+    AppCompatButton update, upi ,change;
+    String id, image, pass, name, type, place, district, state, phone, email, newpassword, confirmpassword,
+            status, message, url=Config.baseurl+"stadium_dp_update.php";
+    String url1=Config.baseurl+"stadium_password_change.php";
 
     Uri uri;
     private RequestQueue rQueue;
@@ -87,6 +91,9 @@ public class StadiumProfileFragment extends Fragment {
         semail = binding.sEmail;
         update = binding.sUpdate;
         upi = binding.sUpi;
+        change = binding.sPasswordChange;
+        newPass = binding.newPassword;
+        conPass = binding.confirmPassword;
 
         id = new SessionManager(getActivity()).getUserDetails().get("id");
         image = new SessionManager(getActivity()).getUserDetails().get("image");
@@ -130,19 +137,86 @@ public class StadiumProfileFragment extends Fragment {
             }
         });
 
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePassword();
+            }
+        });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new SessionManager(getActivity()).logoutUser();
                 Intent intent = new Intent(getActivity(), Login.class);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "Logout Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
                 getActivity().finish();
             }
         });
 
 
         return root;
+    }
+
+    private void changePassword() {
+
+        newpassword = newPass.getText().toString();
+        confirmpassword = conPass.getText().toString();
+
+        if (TextUtils.isEmpty(newpassword)){
+            newPass.setError("Field is empty");
+            newPass.requestFocus();
+            return;
+        }else if (TextUtils.isEmpty(confirmpassword)){
+            conPass.setError("Field is empty");
+            conPass.requestFocus();
+            return;
+        }else if (!newpassword.equals(confirmpassword)){
+            conPass.setError("Password is not match");
+            conPass.requestFocus();
+            return;
+        }
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject c = new JSONObject(response);
+                    status = c.getString("status");
+                    message = c.getString("message");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (status.equals("1")){
+                    new SessionManager(getActivity()).createLoginSession(id,email,confirmpassword,type,name,place,district,phone,image,state);
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(getApplicationContext(), Admin.class);
+//                    startActivity(intent);
+//                    finish();
+                } else{
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("id", id);
+                map.put("password", confirmpassword);
+                return map;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+
     }
 
     private void changeDp() {

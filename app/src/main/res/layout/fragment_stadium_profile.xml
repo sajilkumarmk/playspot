@@ -262,7 +262,7 @@
                 android:paddingLeft="15dp"
                 android:textSize="15sp" />
             <EditText
-                android:id="@+id/conformPassword"
+                android:id="@+id/confirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
@@ -279,7 +279,7 @@
                 android:paddingLeft="15dp"
                 android:textSize="15sp" />
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/update"
+                android:id="@+id/sPasswordChange"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="25dp"
