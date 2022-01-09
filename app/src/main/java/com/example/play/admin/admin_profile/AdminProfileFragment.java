@@ -76,7 +76,7 @@ public class AdminProfileFragment extends Fragment {
                 new SessionManager(getActivity()).logoutUser();
                 Intent intent = new Intent(getActivity(), Login.class);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "Logout Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
                 getActivity().finish();
 
             }

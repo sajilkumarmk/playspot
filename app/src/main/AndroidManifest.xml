@@ -14,6 +14,22 @@
         android:theme="@style/Theme.PlayspotTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:windowSoftInputMode="adjustResize"
+            android:name="com.example.play.stadium.StadiumProfile.StadiumUpiUpdate"
+            android:theme="@style/Theme.PlayspotThemePlayground"
+            android:exported="true" />
+        <activity
+            android:windowSoftInputMode="adjustResize"
+            android:name="com.example.play.stadium.StadiumProfile.StadiumProfileUpdate"
+            android:theme="@style/Theme.PlayspotThemePlayground"
+            android:exported="true" />
+        <activity
+            android:windowSoftInputMode="adjustResize"
+            android:name="com.example.play.Stadium"
+            android:theme="@style/Theme.PlayspotThemePlayground"
+            android:exported="true"
+            android:label="@string/title_activity_stadium" />
+        <activity
             android:name="com.example.play.Admin"
             android:exported="true"
             android:label="@string/title_activity_admin"
@@ -39,7 +55,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

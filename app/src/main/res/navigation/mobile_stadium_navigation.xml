@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_stadium_booking">
+
+    <fragment
+        android:id="@+id/navigation_stadium_booking"
+        android:name="com.example.play.stadium.StadiumBooking.StadiumBookingFragment"
+        android:label="@string/title_stadium_booking"
+        tools:layout="@layout/fragment_stadium_booking" />
+
+    <fragment
+        android:id="@+id/navigation_stadium_accounts"
+        android:name="com.example.play.stadium.StadumAccounts.StadiumAccountsFragment"
+        android:label="@string/title_stadium_accounts"
+        tools:layout="@layout/fragment_stadium_accounts" />
+
+    <fragment
+        android:id="@+id/navigation_stadium_facilities"
+        android:name="com.example.play.stadium.StadiumFacilities.StadiumFacilitiesFragment"
+        android:label="@string/title_stadium_facilities"
+        tools:layout="@layout/fragment_stadium_facilities" />
+
+    <fragment
+        android:id="@+id/navigation_stadium_profile"
+        android:name="com.example.play.stadium.StadiumProfile.StadiumProfileFragment"
+        android:label="@string/title_stadium_profile"
+        tools:layout="@layout/fragment_stadium_profile" />
+</navigation>

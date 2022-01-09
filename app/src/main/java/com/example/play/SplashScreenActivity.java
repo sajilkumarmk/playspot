@@ -17,7 +17,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (new SessionManager(SplashScreenActivity.this).isLoggedIn()){
-                    Intent intent = new Intent(getApplicationContext(), Admin.class);
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
                     startActivity(intent);
                     finish();
                 }

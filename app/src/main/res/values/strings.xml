@@ -6,4 +6,9 @@
     <string name="title_adminHome">Home</string>
     <string name="title_adminFeedback">Feedback</string>
     <string name="title_adminProfile">Profile</string>
+    <string name="title_activity_stadium">Stadium</string>
+    <string name="title_stadium_booking">Booking</string>
+    <string name="title_stadium_accounts">Accounts</string>
+    <string name="title_stadium_facilities">Facilities</string>
+    <string name="title_stadium_profile">Profile</string>
 </resources>

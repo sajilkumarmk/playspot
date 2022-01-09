@@ -88,25 +88,25 @@ public class Login extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if (status.equals("1")){
-                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,name,place,district,phone,image,type,state);
+                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,type,name,place,district,phone,image,state);
 //                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), Admin.class);
                     startActivity(intent);
                     finish();
                 }
                 else if (status.equals("2")){
-                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,name,place,district,phone,image,type,state);
+                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,type,name,place,district,phone,image,state);
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getApplicationContext(), UserHome.class);
+//                    Intent intent = new Intent(getApplicationContext(), Stadium.class);
 //                    startActivity(intent);
 //                    finish();
                 }
                 else if (status.equals("3")){
-                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,name,place,district,phone,image,type,state);
+                    new SessionManager(getApplicationContext()).createLoginSession(id,Emailid,pass,type,name,place,district,phone,image,state);
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(getApplicationContext(), PlayHome.class);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(getApplicationContext(), Stadium.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else if (status.equals("4")){
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

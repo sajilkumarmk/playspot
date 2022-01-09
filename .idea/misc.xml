@@ -5,24 +5,49 @@
       <map>
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/admin_button_bg.xml" value="0.18949771689497716" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/admin_feedback_appbar_bg.xml" value="0.18949771689497716" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/admin_profile_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/bottom_navigation_bg.xml" value="0.18949771689497716" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/delete_button_bg.xml" value="0.18949771689497716" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_admin_home_black_24dp.xml" value="0.18949771689497716" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_baseline_account__24.xml" value="0.18949771689497716" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_baseline_facilities_24.xml" value="0.18949771689497716" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_baseline_logout.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_baseline_menu_book_24.xml" value="0.18949771689497716" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_baseline_upi_24.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_baseline_visibility_24.xml" value="0.18949771689497716" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_baseline_visibility_off_24.xml" value="0.18949771689497716" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_email.xml" value="0.18949771689497716" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/ic_facebook.xml" value="0.18949771689497716" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/list_card_bg.xml" value="0.18949771689497716" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/platground_bottom_navigation_bg.xml" value="0.18949771689497716" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/playground_bottom_navigation_bg.xml" value="0.19212962962962962" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/drawable/playground_profile_bg.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/activity_admin.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/activity_login.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/activity_stadium.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/admin_feedback_list_item.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/admin_playground_list_item.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/approved_list_item_view.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_adminfeedback.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_adminhome.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_adminprofile.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_approved_plaground.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_pending_playground.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_playground_registration.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_stadium_accounts.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_stadium_booking.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_stadium_dashboard.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_stadium_facilities.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_stadium_home.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_stadium_notifications.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/fragment_stadium_profile.xml" value="0.22" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/pending_list_item_view.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/stadium_profile_update.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/layout/stadium_upi_update.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/menu/admin_bottom_nav_menu.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/menu/bottom_nav_menu.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/91974/AndroidStudioProjects/play/app/src/main/res/menu/stadium_bottom_nav_menu.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/admin_button_bg.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/admin_profile_bg.xml" value="0.19212962962962962" />
         <entry key="..\:/Users/91974/AndroidStudioProjects/playspot/app/src/main/res/drawable/bottom_navigation_bg.xml" value="0.19212962962962962" />
