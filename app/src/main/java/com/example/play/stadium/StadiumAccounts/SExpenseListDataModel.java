@@ -1,4 +1,4 @@
-package com.example.play.stadium.StadumAccounts;
+package com.example.play.stadium.StadiumAccounts;
 
 public class SExpenseListDataModel {
     String e_id, type, date,amount, description, bill;

@@ -1,4 +1,4 @@
-package com.example.play.stadium.StadumAccounts;
+package com.example.play.stadium.StadiumAccounts;
 
 import android.content.Context;
 import android.view.LayoutInflater;

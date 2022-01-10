@@ -1,17 +1,15 @@
-package com.example.play.stadium.StadumAccounts;
+package com.example.play.stadium.StadiumAccounts;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.play.databinding.FragmentStadiumAccountsBinding;
-import com.example.play.stadium.StadiumFacilities.StadiumFacilitiesViewPageAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 //import com.example.twobottomnav.databinding.FragmentHomeBinding;

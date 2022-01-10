@@ -1,8 +1,7 @@
-package com.example.play.stadium.StadumAccounts;
+package com.example.play.stadium.StadiumBooking;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,61 +24,47 @@ import com.android.volley.toolbox.Volley;
 import com.example.play.Config;
 import com.example.play.R;
 import com.example.play.SessionManager;
-import com.example.play.databinding.FragmentSCourtBinding;
-import com.example.play.databinding.FragmentSExpenseBinding;
-import com.example.play.stadium.StadiumFacilities.SCourtListAdapter;
-import com.example.play.stadium.StadiumFacilities.SCourtListDataModel;
-import com.example.play.stadium.StadiumFacilities.StadiumCourtAdd;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.play.databinding.FragmentStadiumCurrentBookingBinding;
+import com.example.play.databinding.FragmentStadiumHistoryBookingBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
-public class SExpenseFragment extends Fragment {
+public class StadiumHistoryBookingFragment extends Fragment {
 
-    private FragmentSExpenseBinding binding;
-    TextView totalExpense;
+    private FragmentStadiumHistoryBookingBinding binding;
     RecyclerView recyclerview;
-    FloatingActionButton add;
-    private String URLstring = Config.baseurl+"stadium_expense_list.php";
+    private String URLstring = Config.baseurl+"stadium_historybooking_list.php";
     private static ProgressDialog mProgressDialog;
-    ArrayList<SExpenseListDataModel> dataModelArrayList;
-    private SExpenseListAdapter rvAdapter;
-    String id,total;
-    int ttl,tot = 0;
+    ArrayList<SCurrentBookingListDataModel> dataModelArrayList;
+    private SCurrentBookingListAdapter rvAdapter;
+    String id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentSExpenseBinding.inflate(inflater, container, false);
+        binding = FragmentStadiumHistoryBookingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        recyclerview = binding.recyclerSExpenseList;
-        add = binding.sExpenseAdd;
-        totalExpense = binding.sTotalExpense;
+        recyclerview = binding.recyclerSHistoryBookingList;
         fetchingJSON();
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StadiumCourtAdd.class);
-                startActivity(intent);
-            }
-        });
-
-        return root;
-    }
+        return  root;    }
 
     private void fetchingJSON() {
 
         id = new SessionManager(getActivity()).getUserDetails().get("id");
+        String currentDate=new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format( new Date() );
 
         showSimpleProgressDialog(getActivity(), "Loading...","Please wait...",false);
 
@@ -95,13 +79,17 @@ public class SExpenseFragment extends Fragment {
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject dataobj = array.getJSONObject(i);
-                                dataModelArrayList.add(new SExpenseListDataModel(
-                                        dataobj.getString("e_id"),
-                                        dataobj.getString("type"),
-                                        dataobj.getString("date"),
-                                        dataobj.getString("amount"),
-                                        dataobj.getString("description"),
-                                        dataobj.getString("bill")
+                                dataModelArrayList.add(new SCurrentBookingListDataModel(
+                                        dataobj.getString("b_id"),
+                                        dataobj.getString("user_id"),
+                                        dataobj.getString("booking_date"),
+                                        dataobj.getString("booking_time"),
+                                        dataobj.getString("payment_type"),
+                                        dataobj.getString("gametype"),
+                                        dataobj.getString("courttype"),
+                                        dataobj.getString("name"),
+                                        dataobj.getString("image"),
+                                        dataobj.getString("phone")
                                 ));
                             }
                             setupRecycler();
@@ -122,6 +110,7 @@ public class SExpenseFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
                 map.put("id", id);
+                map.put("currentDate", currentDate);
                 return map;
             }
         };
@@ -133,11 +122,12 @@ public class SExpenseFragment extends Fragment {
 
     private void setupRecycler(){
 
-        rvAdapter = new SExpenseListAdapter(getActivity(), dataModelArrayList);
+        rvAdapter = new SCurrentBookingListAdapter(this.getActivity(), dataModelArrayList);
         recyclerview.setHasFixedSize(true);
         recyclerview.setAdapter(rvAdapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-        getTotalPrice();
+//        Toast.makeText(getActivity(),"Success", Toast.LENGTH_SHORT).show();
+//        getTotalPrice();
     }
 
     public static void removeSimpleProgressDialog() {
@@ -187,13 +177,5 @@ public class SExpenseFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-    private void getTotalPrice() {
-        for (int i=0;i<dataModelArrayList.size();i++){
-            total=dataModelArrayList.get(i).getAmount();
-            ttl=Integer.parseInt(total);
-            tot=tot+ttl;
 
-        }
-        totalExpense.setText( String.valueOf( tot ) );
-    }
 }

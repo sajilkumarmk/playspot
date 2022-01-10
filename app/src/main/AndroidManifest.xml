@@ -15,6 +15,16 @@
         android:usesCleartextTraffic="true">
         <activity
             android:windowSoftInputMode="adjustResize"
+            android:name="com.example.play.stadium.StadiumAccounts.StadiumExpenseBillView"
+            android:theme="@style/Theme.PlayspotThemePlayground"
+            android:exported="true" />
+        <activity
+            android:windowSoftInputMode="adjustResize"
+            android:name="com.example.play.stadium.StadiumAccounts.StadiumExpenseAdd"
+            android:theme="@style/Theme.PlayspotThemePlayground"
+            android:exported="true" />
+        <activity
+            android:windowSoftInputMode="adjustResize"
             android:name="com.example.play.stadium.StadiumFacilities.StadiumCourtUpdate"
             android:theme="@style/Theme.PlayspotThemePlayground"
             android:exported="true" />

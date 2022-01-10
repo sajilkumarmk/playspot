@@ -1,4 +1,4 @@
-package com.example.play.stadium.StadumAccounts;
+package com.example.play.stadium.StadiumAccounts;
 
 public class SPaymentListDataModel {
     String p_id, type, amount, username, userimage;

@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_stadium_accounts"
-        android:name="com.example.play.stadium.StadumAccounts.StadiumAccountsFragment"
+        android:name="com.example.play.stadium.StadiumAccounts.StadiumAccountsFragment"
         android:label="@string/title_stadium_accounts"
         tools:layout="@layout/fragment_stadium_accounts" />
 

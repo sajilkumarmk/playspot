@@ -1,7 +1,8 @@
-package com.example.play.stadium.StadumAccounts;
+package com.example.play.stadium.StadiumAccounts;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,10 +24,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.play.Config;
-import com.example.play.R;
 import com.example.play.SessionManager;
+import com.example.play.admin.admin_home.ListItemClick;
 import com.example.play.databinding.FragmentSExpenseBinding;
-import com.example.play.databinding.FragmentSPaymentBinding;
+import com.example.play.stadium.StadiumFacilities.StadiumCourtUpdate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -37,15 +38,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SPaymentFragment extends Fragment {
 
-    private FragmentSPaymentBinding binding;
+public class SExpenseFragment extends Fragment implements ListItemClick {
+
+    private FragmentSExpenseBinding binding;
     TextView totalExpense;
     RecyclerView recyclerview;
-    private String URLstring = Config.baseurl+"stadium_payment_list.php";
+    FloatingActionButton add;
+    private String URLstring = Config.baseurl+"stadium_expense_list.php";
     private static ProgressDialog mProgressDialog;
-    ArrayList<SPaymentListDataModel> dataModelArrayList;
-    private SPaymentListAdapter rvAdapter;
+    ArrayList<SExpenseListDataModel> dataModelArrayList;
+    private SExpenseListAdapter rvAdapter;
     String id,total;
     int ttl,tot = 0;
 
@@ -53,14 +56,23 @@ public class SPaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentSPaymentBinding.inflate(inflater, container, false);
+        binding = FragmentSExpenseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        recyclerview = binding.recyclerSPaymentList;
-        totalExpense = binding.sTotalPayment;
+        recyclerview = binding.recyclerSExpenseList;
+        add = binding.sExpenseAdd;
+        totalExpense = binding.sTotalExpense;
         fetchingJSON();
 
-        return  root;
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StadiumExpenseAdd.class);
+                startActivity(intent);
+            }
+        });
+
+        return root;
     }
 
     private void fetchingJSON() {
@@ -80,12 +92,13 @@ public class SPaymentFragment extends Fragment {
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject dataobj = array.getJSONObject(i);
-                                dataModelArrayList.add(new SPaymentListDataModel(
-                                        dataobj.getString("pay_id"),
+                                dataModelArrayList.add(new SExpenseListDataModel(
+                                        dataobj.getString("e_id"),
                                         dataobj.getString("type"),
+                                        dataobj.getString("date"),
                                         dataobj.getString("amount"),
-                                        dataobj.getString("username"),
-                                        dataobj.getString("userimage")
+                                        dataobj.getString("description"),
+                                        dataobj.getString("bill")
                                 ));
                             }
                             setupRecycler();
@@ -117,11 +130,10 @@ public class SPaymentFragment extends Fragment {
 
     private void setupRecycler(){
 
-        rvAdapter = new SPaymentListAdapter(this.getActivity(), dataModelArrayList);
+        rvAdapter = new SExpenseListAdapter(getActivity(), dataModelArrayList, this);
         recyclerview.setHasFixedSize(true);
         recyclerview.setAdapter(rvAdapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-//        Toast.makeText(getActivity(),"Success", Toast.LENGTH_SHORT).show();
         getTotalPrice();
     }
 
@@ -182,4 +194,10 @@ public class SPaymentFragment extends Fragment {
         totalExpense.setText( String.valueOf( tot ) );
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(getActivity(), StadiumExpenseBillView.class);
+        intent.putExtra("EBILL", dataModelArrayList.get(position).getBill());
+        startActivity(intent);
+    }
 }

@@ -1,12 +1,9 @@
-package com.example.play.stadium.StadumAccounts;
+package com.example.play.stadium.StadiumAccounts;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-
-import com.example.play.stadium.StadiumFacilities.SCourtFragment;
-import com.example.play.stadium.StadiumFacilities.SFacilitiesFragment;
 
 public class StadiumAccountsViewPageAdapter extends FragmentStateAdapter {
 
