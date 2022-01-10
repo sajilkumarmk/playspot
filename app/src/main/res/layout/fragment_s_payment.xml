@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".stadium.StadumAccounts.SPaymentFragment">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/total"
+        app:cardElevation="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Total Payment"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/sTotalPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="50dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Amount"
+                android:textColor="@color/green_primary"
+                android:textSize="25sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerSPaymentList"
+        android:layout_below="@id/total"/>
+
+</RelativeLayout>
